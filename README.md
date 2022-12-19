@@ -2,6 +2,37 @@
 
 LNURL cypherapp for cyphernode
 
+## Installation
+ 1. Checkout to 'dev' branch
+ 2. npm install
+ 3. Create an empty file at logs/lnurl.log
+ 4. Copy cypherapps/data/config.json to data/config.json
+
+Temporary steps:
+To fix: Error: Migration engine error: Creating SQLite database parent directory. Read-only file system (os error 30)
+ 1. prisma/schema.prism: Set datasource.db.url to "file:./lnurl.sqlite"
+ 2. src/lib/LnurlDBPrisma.ts: configureDB()
+
+Change this
+    this._db = await this.initDatabase(
+      path.resolve(
+        lnurlConfig.BASE_DIR,
+        lnurlConfig.DATA_DIR,
+        lnurlConfig.DB_NAME
+      )
+    );
+
+to
+
+    this._db = await this.initDatabase(
+      path.resolve(
+        'prisma',
+        lnurlConfig.DB_NAME
+      )
+    );
+
+
+
 ## LNURL-withdraw happy path
 
 1. Service (your web app) calls createLnurlWithdraw endpoint, receives a LNURL string
