@@ -14,6 +14,7 @@ To fix: Error: Migration engine error: Creating SQLite database parent directory
  2. src/lib/LnurlDBPrisma.ts: configureDB()
 
 Change this
+
     this._db = await this.initDatabase(
       path.resolve(
         lnurlConfig.BASE_DIR,
